@@ -18,11 +18,13 @@
 `workflows/from-reference.md` 참고:
 
 1. 사용자가 시스템 설명 또는 참고(영상/게임/링크) 제시  
-2. **Producer**가 범위·유사도(충실 재현 / 영감) 확인  
-3. **Systems Analyst**가 `templates/reference-brief.md` + `system-spec.md` 작성  
+2. **Producer**가 범위·유사도·콜아웃·자산화 의도 확인  
+3. **Systems Analyst**가 `docs/references/`에 자산 저장 + brief/spec 작성  
 4. 사용자 승인  
 5. **Implementer**가 수직 슬라이스 구현  
-6. **Fidelity QA**가 `templates/fidelity-report.md`로 검수  
+6. **Fidelity QA**가 검수하고 자산 상태 갱신  
+
+참고 자산화 상세: `workflows/reference-assets.md`
 
 ## 소비 프로젝트에 설치 (submodule)
 

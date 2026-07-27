@@ -1,5 +1,5 @@
 ---
-description: Activate Systems Analyst — decompose references into system specs
+description: Activate Systems Analyst — decompose references into system specs and docs assets
 alwaysApply: false
 ---
 
@@ -7,4 +7,4 @@ alwaysApply: false
 
 Follow `.cursor/system-crew/roles/02-systems-analyst.md`.
 
-Produce `reference-brief` and `system-spec` using templates under `.cursor/system-crew/templates/`. Do not implement until the user approves the spec.
+Search `docs/references/INDEX.md` first. Produce a reference asset folder (`ASSET.md` + brief/spec) using templates under `.cursor/system-crew/templates/`. Capture user callouts separately. Do not implement until the user approves the spec (unless analysis-only).

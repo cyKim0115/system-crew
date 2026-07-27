@@ -4,43 +4,53 @@
 
 ```
 User input
-  → Producer (intake + similarity + scope)
-  → Systems Analyst (brief + spec)
+  → Producer (intake + similarity + scope + asset intent)
+  → Systems Analyst (search INDEX → brief + ASSET + spec)
   → User approval gate
   → Implementer (vertical slice)
-  → Fidelity QA (report)
+  → Fidelity QA (report + asset status update)
   → fix loop or done
 ```
+
+문서 자산화 상세: `workflows/reference-assets.md`
 
 ## Phase 0 — Intake (Producer)
 
 - 참고 목록(URL, 게임명, 타임스탬프, “몇 분 구간”)을 모은다.
+- **User callouts**: 사용자가 무엇을 비슷하게 하고 싶은지 확인한다.
 - 유사도: `faithful` | `inspired` 확정.
 - In/Out scope, 성공 조건 확정.
 - 영상이 길면 “어느 구간을 재현할지”를 질문한다.
+- 기본으로 분석 결과는 `docs/references/`에 자산화한다.
 
 ## Phase 1 — Analyze (Systems Analyst)
 
-1. 참고를 관찰 가능한 규칙으로 분해 → `templates/reference-brief.md`
-2. 구현 스펙 → `templates/system-spec.md`
-3. Open questions 정리
-4. Producer가 사용자에게 승인 요청
+1. `docs/references/INDEX.md`에서 유사 자산 검색
+2. 자산 폴더 생성 또는 기존 자산 재사용 합의
+3. User callouts → `reference-brief.md` → `ASSET.md` → `system-spec.md`
+4. INDEX 갱신
+5. Open questions 정리
+6. Producer가 사용자에게 승인 요청
 
 ## Phase 2 — Implement (Implementer)
 
 - 승인 스펙만 구현.
 - 플레이 방법 1문단 + QA 포인트를 남긴다.
+- 가능하면 자산 `Artifact links`에 구현 위치 메모.
 
 ## Phase 3 — Verify (Fidelity QA)
 
-- `templates/fidelity-report.md`
+- `templates/fidelity-report.md` (자산 폴더에 저장 권장)
+- `ASSET.md` Status / links 갱신
 - `NEEDS_FIX` → Implementer
 - `NEEDS_SPEC` → Analyst
 - `SHIPPABLE` → 종료 또는 다음 시스템 Intake
 
 ## Cursor에서 호출 예시
 
-- `Producer로 intake 해줘. 참고: ...`
-- `Systems Analyst로 reference brief랑 system spec 작성`
+- `Producer로 intake 해줘. 참고: ... / 내가 짚은 점: ...`
+- `INDEX에서 dash·hitstop 자산 먼저 찾아줘`
+- `Systems Analyst로 reference asset이랑 spec 작성`
+- `분석만 자산화해줘. 구현은 나중에`
 - `스펙 승인했어. Implementer로 구현`
-- `Fidelity QA로 검수`
+- `Fidelity QA로 검수하고 자산 상태 갱신`

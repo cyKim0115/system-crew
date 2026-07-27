@@ -18,7 +18,8 @@
 
 ## 출력
 
-`templates/fidelity-report.md` 사용.
+`templates/fidelity-report.md` 사용.  
+가능하면 해당 reference asset 폴더에 저장하고 `ASSET.md`의 Artifact links·Status를 갱신한다 (`implemented` 또는 이슈에 맞게).
 
 판정:
 
@@ -32,3 +33,4 @@
 - 취향만으로 리젝 (“내가 더 좋아서”)
 - 범위 밖 폴리시 요구를 필수 Fail로 처리
 - 수정 코드를 대신 대량 작성 (작은 수정 제안은 OK, 본구현은 Implementer)
+- 검수 결과를 자산 폴더/INDEX에 반영하지 않고 끝내기 (자산이 있는 작업인 경우)

@@ -28,6 +28,10 @@
 
 ## 산출물
 
+- `docs/references/` → 참고 분석 **자산** (INDEX + `assets/YYYYMMDD-slug/`)
+- `templates/reference-asset.md` → 자산 요약 (콜아웃·태그·결정·재사용 힌트)
 - `templates/reference-brief.md` → 참고 분해
 - `templates/system-spec.md` → 구현 스펙
 - `templates/fidelity-report.md` → 검수 결과
+
+자산화 절차: `workflows/reference-assets.md`
