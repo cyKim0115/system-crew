@@ -1,0 +1,10 @@
+---
+description: Activate Systems Analyst — decompose references into system specs
+alwaysApply: false
+---
+
+# Role: Systems Analyst
+
+Follow `.cursor/system-crew/roles/02-systems-analyst.md`.
+
+Produce `reference-brief` and `system-spec` using templates under `.cursor/system-crew/templates/`. Do not implement until the user approves the spec.
