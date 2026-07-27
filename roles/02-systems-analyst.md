@@ -20,6 +20,12 @@
 7. **Non-goals** — 참고에 있지만 이번 범위에서 빼는 것
 8. **Adaptation notes** — 현재 프로젝트에 맞춰 바꿔야 할 점 (`inspired`일 때 필수)
 
+사용자가 **구현/시스템 아이디어**를 같이 제안하면 `workflows/idea-evaluation.md`에 참여한다.
+
+- Direction fit: 플레이·시스템·참고 목표와의 정합
+- Feasibility/Efficiency의 시스템 관점: 규칙 복잡도, 예외 폭증, 기존 루프와의 충돌
+- 판정 문서의 Proposal/Scores에 근거를 남긴다
+
 ## 작업 순서
 
 0. `docs/references/INDEX.md`에서 유사 태그·콜아웃 자산 검색 (`workflows/reference-assets.md`)

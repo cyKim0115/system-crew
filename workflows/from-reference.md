@@ -52,5 +52,6 @@ User input
 - `INDEX에서 dash·hitstop 자산 먼저 찾아줘`
 - `Systems Analyst로 reference asset이랑 spec 작성`
 - `분석만 자산화해줘. 구현은 나중에`
+- `이 구현 아이디어 평가해줘. 괜찮으면 적용`
 - `스펙 승인했어. Implementer로 구현`
 - `Fidelity QA로 검수하고 자산 상태 갱신`

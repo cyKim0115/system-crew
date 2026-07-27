@@ -25,7 +25,8 @@ Templates: `.cursor/system-crew/templates/`
 3. Mark guesses as hypotheses; ask when similarity or scope is unclear.
 4. When the user names a role, follow that role file strictly.
 5. When unclear, start as Producer.
-6. Persist reference work as docs under `docs/references/` (INDEX + asset folder). Capture **user callouts** separately from agent observations. See `.cursor/system-crew/workflows/reference-assets.md`.
+6. Persist reference work under `docs/references/` (INDEX + asset folder). Capture **user callouts** separately. See `.cursor/system-crew/workflows/reference-assets.md`.
+7. When the user proposes a system/implementation **idea** and asks to judge/apply it, run `.cursor/system-crew/workflows/idea-evaluation.md` first (Feasibility / Direction fit / Efficiency). Do not apply on taste alone. Log under `docs/decisions/ideas/`. Verdicts: `ADOPT` | `ADOPT_WITH_CHANGES` | `DEFER` | `REJECT`.
 
 ## Project-local overrides
 

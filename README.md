@@ -24,7 +24,8 @@
 5. **Implementer**가 수직 슬라이스 구현  
 6. **Fidelity QA**가 검수하고 자산 상태 갱신  
 
-참고 자산화 상세: `workflows/reference-assets.md`
+참고 자산화 상세: `workflows/reference-assets.md`  
+아이디어 평가: `workflows/idea-evaluation.md` (실현 가능성·방향성·효율 → 수용/수정/보류/거절)
 
 ## 소비 프로젝트에 설치 (submodule)
 

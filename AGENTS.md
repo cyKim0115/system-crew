@@ -8,30 +8,35 @@
 2. “비슷하게”의 기준을 먼저 고정한다: **충실 재현** vs **핵심만 영감**.
 3. 참고 자료에 없는 기능은 임의 추가하지 않는다. 필요하면 옵션으로 제안하고 사용자 승인을 받는다.
 4. 한 번에 전체 게임을 만들지 않는다. **한 시스템(또는 수직 슬라이스)** 단위로 진행한다.
+5. 참고 분석은 `docs/references/`에 **자산화**한다. 사용자 콜아웃과 에이전트 관찰을 분리한다.
+6. 사용자가 시스템·구현 **아이디어**를 내면 평가 없이 적용하지 않는다. 실현 가능성·방향성·효율을 판단해 수용·수정·보류·거절한다 (`workflows/idea-evaluation.md`).
 
 ## 역할 라우팅
 
 | 상황 | 담당 |
 |------|------|
 | 새 요청, 범위 불명, 단계 선택 | Producer |
-| 영상/게임/문서 참고 분석, 스펙 작성 | Systems Analyst |
+| 시스템/구현 아이디어 판단 요청 | Producer (+ Analyst/Implementer 자문) |
+| 영상/게임/문서 참고 분석, 스펙·자산 작성 | Systems Analyst |
 | 코드·씬·프리팹 구현 | Implementer |
 | 참고 대비 검수, 누락·괴리 지적 | Fidelity QA |
 
-상세 역할: `roles/`. 표준 루프: `workflows/from-reference.md`.
+상세 역할: `roles/`.  
+표준 루프: `workflows/from-reference.md`.  
+아이디어 평가: `workflows/idea-evaluation.md`.  
+자산화: `workflows/reference-assets.md`.
 
 ## 사용자 입력 예시
 
 - “이 영상처럼 대시 후 히트스탑이 있는 콤보를 만들어줘” + URL
 - “슬레이 더 스파이어식 맵 노드 선택 루프”
 - “우리 게임의 X 시스템에 Y 게임의 쿨다운 UI 감각만”
+- “분석만 자산화해줘. 구현은 나중에”
+- “상태머신으로 바꾸는 게 나을 것 같은데, 판단해서 적용해줘”
 
 ## 산출물
 
-- `docs/references/` → 참고 분석 **자산** (INDEX + `assets/YYYYMMDD-slug/`)
-- `templates/reference-asset.md` → 자산 요약 (콜아웃·태그·결정·재사용 힌트)
-- `templates/reference-brief.md` → 참고 분해
-- `templates/system-spec.md` → 구현 스펙
-- `templates/fidelity-report.md` → 검수 결과
-
-자산화 절차: `workflows/reference-assets.md`
+- `docs/references/` → 참고 분석 자산
+- `docs/decisions/ideas/` → 아이디어 평가 기록
+- `templates/reference-asset.md` / `reference-brief.md` / `system-spec.md` / `fidelity-report.md`
+- `templates/idea-evaluation.md`
