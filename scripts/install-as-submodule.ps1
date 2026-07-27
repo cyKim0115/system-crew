@@ -5,7 +5,9 @@
 
 param(
     [string]$CrewUrl = "",
-    [string]$TargetPath = ".cursor/system-crew"
+    [string]$TargetPath = ".cursor/system-crew",
+    [ValidateSet("Always", "OnDemand")]
+    [string]$Mode = "Always"
 )
 
 $ErrorActionPreference = "Stop"
@@ -36,6 +38,6 @@ if (Test-Path (Join-Path $ProjectRoot $TargetPath)) {
 
 git -c protocol.file.allow=always submodule update --init --recursive
 $sync = Join-Path $ProjectRoot "$TargetPath/scripts/sync-to-project.ps1"
-& powershell.exe -NoProfile -File $sync -ProjectRoot $ProjectRoot
+& powershell.exe -NoProfile -File $sync -ProjectRoot $ProjectRoot -Mode $Mode
 
-Write-Host "Done. Commit .gitmodules, $TargetPath, .cursor/rules, and AGENTS.md when ready."
+Write-Host "Done. Commit .gitmodules, $TargetPath, synced rules/skills when ready. Mode=$Mode"

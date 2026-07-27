@@ -38,14 +38,17 @@ git submodule add git@github.com:<you>/system-crew.git .cursor/system-crew
 # 로컬 절대 경로 (이 PC 전용; file 프로토콜 허용 필요)
 git -c protocol.file.allow=always submodule add --force C:/Users/cykim/repo/system-crew .cursor/system-crew
 
-# 또는 설치 스크립트
+# 또는 설치 스크립트 (상시)
 powershell -File ..\system-crew\scripts\install-as-submodule.ps1
+# 호출형만
+powershell -File ..\system-crew\scripts\install-as-submodule.ps1 -Mode OnDemand
 
 git submodule update --init --recursive
 powershell -File .cursor/system-crew/scripts/sync-to-project.ps1
+# OnDemand면: -Mode OnDemand
 ```
 
-> 참고: narak처럼 이미 원격이 있는 저장소에서 `../system-crew`만 쓰면 GitHub의 `system-crew` URL로 해석될 수 있습니다. 원격이 없으면 로컬 절대 경로 또는 GitHub URL을 쓰세요.
+> 참고: 이미 원격이 있는 저장소에서 `../system-crew`만 쓰면 호스트의 동일 이름 원격 URL로 해석될 수 있습니다. 원격이 없으면 로컬 절대 경로 또는 GitHub URL을 쓰세요.
 
 자세한 내용: `consumer/INTEGRATION.md`
 
@@ -56,6 +59,7 @@ powershell -File .cursor/system-crew/scripts/sync-to-project.ps1
 ```powershell
 git submodule update --remote .cursor/system-crew
 powershell -File .cursor/system-crew/scripts/sync-to-project.ps1
+# OnDemand 프로젝트는 -Mode OnDemand 유지
 ```
 
 프로젝트 전용 커스텀은 `.cursor/rules/local/`에 두고, sync가 덮어쓰지 않게 합니다.

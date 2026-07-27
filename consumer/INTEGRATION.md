@@ -3,8 +3,15 @@
 ## Goal
 
 - Keep the shared 4-role pack in the **system-crew** repo
-- Use it from game repos (e.g. narak) via **git submodule**
+- Use it from game repos via **git submodule**
 - When system-crew changes, consumer runs update + sync
+
+## Modes
+
+| Mode | When | Behavior |
+|------|------|----------|
+| `Always` (default) | Crew is the default workflow | Rules keep upstream `alwaysApply` |
+| `OnDemand` | Use only when explicitly called | All synced rules forced `alwaysApply: false` + invoke Skill |
 
 ## Layout in consumer
 
@@ -12,44 +19,45 @@
 your-game/
   .cursor/
     system-crew/          ← submodule
+    skills/system-crew/   ← OnDemand only
     rules/
-      system-crew.mdc     ← copied by sync
-      role-*.mdc          ← copied by sync
-      local/              ← YOUR overrides (never overwritten by sync)
-  AGENTS.md               ← includes system-crew section
+      system-crew*.mdc
+      role-*.mdc
+      local/              ← YOUR overrides (never overwritten)
+    SYSTEM-CREW.md        ← OnDemand usage note
 ```
 
 ## Install
 
-From the game repo root:
-
 ```powershell
+# Always-on
 powershell -File ..\system-crew\scripts\install-as-submodule.ps1
-# or with remote:
-# powershell -File ..\system-crew\scripts\install-as-submodule.ps1 -CrewUrl git@github.com:<you>/system-crew.git
+
+# Call-to-use
+powershell -File ..\system-crew\scripts\install-as-submodule.ps1 -Mode OnDemand
 ```
 
 ## Update from upstream
 
 ```powershell
 git submodule update --remote .cursor/system-crew
-powershell -File .cursor/system-crew/scripts/sync-to-project.ps1
+powershell -File .cursor/system-crew/scripts/sync-to-project.ps1 -Mode Always
+# or
+powershell -File .cursor/system-crew/scripts/sync-to-project.ps1 -Mode OnDemand
 ```
 
-Pin a version (optional):
+Keep the same `-Mode` the project chose. Mode is also stored in `.cursor/rules/.system-crew-mode`.
 
-```powershell
-cd .cursor/system-crew
-git checkout v0.1.0
-cd ../..
-powershell -File .cursor/system-crew/scripts/sync-to-project.ps1
-```
+## OnDemand invocation
+
+Say one of: `system-crew`, `시스템 크루`, `Producer로`, `참고 재현`, `아이디어 평가해줘`  
+Or enable the `system-crew` Cursor skill.
 
 ## Local overrides
 
 Put project-only Cursor rules in `.cursor/rules/local/`.  
-Do not edit synced `system-crew*.mdc` / `role-*.mdc` in the consumer — edit the **system-crew** repo and sync again.
+Do not edit synced pack files in the consumer — edit **system-crew** and sync again.
 
 ## Remote recommendation
 
-Push `system-crew` to GitHub and point `.gitmodules` at that URL so clones of the game repo can fetch the submodule.
+Push `system-crew` to a git host and point `.gitmodules` at that URL so clones can fetch the submodule.
