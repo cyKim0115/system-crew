@@ -29,15 +29,20 @@
 프로젝트 루트에서:
 
 ```powershell
-# 형제 디렉터리에 system-crew가 있을 때 (로컬)
-git submodule add ../system-crew .cursor/system-crew
+# 권장: GitHub에 system-crew를 올린 뒤
+git submodule add git@github.com:<you>/system-crew.git .cursor/system-crew
 
-# 또는 원격 URL (권장: GitHub에 올린 뒤)
-# git submodule add git@github.com:<you>/system-crew.git .cursor/system-crew
+# 로컬 절대 경로 (이 PC 전용; file 프로토콜 허용 필요)
+git -c protocol.file.allow=always submodule add --force C:/Users/cykim/repo/system-crew .cursor/system-crew
+
+# 또는 설치 스크립트
+powershell -File ..\system-crew\scripts\install-as-submodule.ps1
 
 git submodule update --init --recursive
 powershell -File .cursor/system-crew/scripts/sync-to-project.ps1
 ```
+
+> 참고: narak처럼 이미 원격이 있는 저장소에서 `../system-crew`만 쓰면 GitHub의 `system-crew` URL로 해석될 수 있습니다. 원격이 없으면 로컬 절대 경로 또는 GitHub URL을 쓰세요.
 
 자세한 내용: `consumer/INTEGRATION.md`
 

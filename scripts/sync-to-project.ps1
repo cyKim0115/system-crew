@@ -42,7 +42,15 @@ Get-ChildItem $dstRules -Filter "role-*.mdc" -File -ErrorAction SilentlyContinue
 
 Copy-Item (Join-Path $srcRules "*.mdc") $dstRules -Force
 
-# Ensure AGENTS.md pointer exists or refresh the system-crew section
+# Ensure AGENTS.md pointer exists or refresh the system-crew section (UTF-8, no BOM)
+$utf8 = New-Object System.Text.UTF8Encoding $false
+function Read-Utf8Text([string]$Path) {
+    return [System.IO.File]::ReadAllText($Path, $utf8)
+}
+function Write-Utf8Text([string]$Path, [string]$Text) {
+    [System.IO.File]::WriteAllText($Path, $Text, $utf8)
+}
+
 $agentsPath = Join-Path $ProjectRoot "AGENTS.md"
 $bannerStart = "<!-- system-crew:start -->"
 $bannerEnd = "<!-- system-crew:end -->"
@@ -62,26 +70,26 @@ $bannerEnd
 "@
 
 if (Test-Path $agentsPath) {
-    $existing = Get-Content $agentsPath -Raw
+    $existing = Read-Utf8Text $agentsPath
     if ($existing -match [regex]::Escape($bannerStart)) {
         $updated = [regex]::Replace($existing, "(?s)" + [regex]::Escape($bannerStart) + ".*?" + [regex]::Escape($bannerEnd), $section.TrimEnd())
-        Set-Content -Path $agentsPath -Value $updated -NoNewline
+        Write-Utf8Text $agentsPath $updated
     } else {
-        Add-Content -Path $agentsPath -Value "`r`n$section"
+        Write-Utf8Text $agentsPath ($existing.TrimEnd() + "`r`n`r`n" + $section.TrimEnd() + "`r`n")
     }
 } else {
-    $fromCrew = Get-Content (Join-Path $crewRoot "AGENTS.md") -Raw
-    Set-Content -Path $agentsPath -Value ($fromCrew.TrimEnd() + "`r`n`r`n$section")
+    $fromCrew = Read-Utf8Text (Join-Path $crewRoot "AGENTS.md")
+    Write-Utf8Text $agentsPath ($fromCrew.TrimEnd() + "`r`n`r`n" + $section.TrimEnd() + "`r`n")
 }
 
 $versionFile = Join-Path $crewRoot "VERSION"
-$version = if (Test-Path $versionFile) { (Get-Content $versionFile -Raw).Trim() } else { "unknown" }
+$version = if (Test-Path $versionFile) { (Read-Utf8Text $versionFile).Trim() } else { "unknown" }
 $meta = @{
     syncedAt = (Get-Date).ToString("o")
     version  = $version
     crewPath = ".cursor/system-crew"
 } | ConvertTo-Json
-Set-Content -Path $stamp -Value $meta
+Write-Utf8Text $stamp $meta
 
 Write-Host "Synced system-crew $version rules → $dstRules"
 Write-Host "Local overrides preserved under $localRules"

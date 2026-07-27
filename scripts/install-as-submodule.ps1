@@ -30,11 +30,12 @@ New-Item -ItemType Directory -Force -Path (Join-Path $ProjectRoot ".cursor") | O
 if (Test-Path (Join-Path $ProjectRoot $TargetPath)) {
     Write-Host "Target already exists: $TargetPath — skipping submodule add"
 } else {
-    git submodule add $CrewUrl $TargetPath
+    # Local file:// / absolute paths need protocol.file.allow (one-shot, no global config write)
+    git -c protocol.file.allow=always submodule add --force $CrewUrl $TargetPath
 }
 
-git submodule update --init --recursive
+git -c protocol.file.allow=always submodule update --init --recursive
 $sync = Join-Path $ProjectRoot "$TargetPath/scripts/sync-to-project.ps1"
-powershell -File $sync -ProjectRoot $ProjectRoot
+& powershell.exe -NoProfile -File $sync -ProjectRoot $ProjectRoot
 
 Write-Host "Done. Commit .gitmodules, $TargetPath, .cursor/rules, and AGENTS.md when ready."
