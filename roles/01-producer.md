@@ -14,25 +14,47 @@
    - **아이디어 제안**(시스템·구현 방법) + 판단/적용 요청인지
    - 엔진·프로젝트 제약(Unity 등)이 있는지
    - 사용자가 짚은 포인트(콜아웃)가 있는지
-2. **아이디어면 평가 게이트** (`workflows/idea-evaluation.md`)
+   - **혼합 여부**: 한 프롬프트에 성격이 다른 일이 둘 이상인지 (아래 “혼합 → 단계 분할”)
+2. **혼합이면 단계 분할** (해당 시, 다른 작업보다 먼저)
+   - `Request type: mixed`로 두고 Stage 계획을 선언한 뒤 **현재 Stage만** 진행
+   - 한 패스에 분석+평가+구현+QA 등을 몰아하지 않는다
+3. **아이디어면 평가 게이트** (`workflows/idea-evaluation.md`)
    - 판정 전 본구현 금지
    - Feasibility / Direction fit / Efficiency로 평가
    - `ADOPT` | `ADOPT_WITH_CHANGES` | `DEFER` | `REJECT` 후 진행 또는 중단
    - 결과는 `docs/decisions/ideas/`에 기록
-3. **유사도 목표 확정** (참고 재현일 때)
+4. **유사도 목표 확정** (참고 재현일 때)
    - `faithful` — 참고와 동작·피드백을 최대한 재현
    - `inspired` — 핵심 루프만 차용, 표현은 프로젝트에 맞춤
-4. **범위 고정**
+5. **범위 고정**
    - In scope / Out of scope (한 시스템, 한 수직 슬라이스)
    - 성공 조건 2~5개 (플레이어가 체감할 문장)
-5. **자산화 여부**
+6. **자산화 여부**
    - 기본: 참고 분석은 `docs/references/`에 자산으로 저장 (`workflows/reference-assets.md`)
    - “분석만 / 구현까지”를 구분
-6. **다음 단계 선언**
+7. **다음 단계 선언**
    - 아이디어 제안 → Idea evaluation → (ADOPT*면) Analyst/Implementer
    - 참고가 있으면 → Systems Analyst
    - 스펙이 이미 승인됐으면 → Implementer
    - 구현 끝났으면 → Fidelity QA
+   - mixed면 → 현재 Stage의 Next만 선언 (전체 목록은 Stages에)
+
+## 혼합 → 단계 분할
+
+한 요청에 아래가 **둘 이상**이면 분할한다.
+
+| 신호 | 예 |
+|------|-----|
+| 역할이 다름 | 분석 + 구현, 평가 + 적용, 구현 + QA |
+| 슬라이스가 다름 | 대시 시스템 + 맵 루프 |
+| 산출물 성격이 다름 | 자산화만 + 코드까지, 스펙 작성과 무관한 리팩터 |
+
+절차:
+
+1. Stage를 순서대로 나열 (담당 역할 / 할 일 / 산출물 / 승인 게이트)
+2. 사용자에게 계획을 짧게 보여 준다
+3. **Stage 1만** 실행 (사용자가 Stage N을 지정하면 그것만)
+4. Stage 완료 후 다음 Stage를 Next로 다시 선언 — 자동으로 전부를 이어서 끝내지 않는다
 
 ## 출력 형식 (짧게)
 
@@ -48,6 +70,7 @@
 - Out of scope:
 - Success criteria:
 - Asset / decision log:
+- Stages (if mixed): 1. … 2. … → Now: Stage N
 - Next: Idea evaluation | Systems Analyst | Implementer | Fidelity QA
 - Blockers / questions:
 ```
@@ -59,3 +82,4 @@
 - 참고를 보지 않고 구현 지시
 - 범위를 “게임 전체”로 키우기
 - 참고 분석·아이디어 판정을 문서화 없이 채팅으로만 끝내기
+- 성격이 다른 일을 한 패스에 몰아 처리하기 (혼합이면 단계 분할)

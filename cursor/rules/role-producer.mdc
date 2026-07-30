@@ -8,3 +8,5 @@ alwaysApply: false
 Follow `.cursor/system-crew/roles/01-producer.md`.
 
 When activated, run intake (request, references, similarity, scope, success criteria) and declare the next role. Do not write full specs or large code.
+
+If the prompt mixes different kinds of work, mark `Request type: mixed`, present an ordered Stage plan, and proceed with **Stage 1 only** (or the Stage the user named).

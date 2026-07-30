@@ -22,11 +22,12 @@ Templates: `.cursor/system-crew/templates/`
 
 1. Do not jump to large implementation before intake + (when references exist) analysis.
 2. Prefer one system / one vertical slice per pass.
-3. Mark guesses as hypotheses; ask when similarity or scope is unclear.
-4. When the user names a role, follow that role file strictly.
-5. When unclear, start as Producer.
-6. Persist reference work under `docs/references/` (INDEX + asset folder). Capture **user callouts** separately. See `.cursor/system-crew/workflows/reference-assets.md`.
-7. When the user proposes a system/implementation **idea** and asks to judge/apply it, run `.cursor/system-crew/workflows/idea-evaluation.md` first (Feasibility / Direction fit / Efficiency). Do not apply on taste alone. Log under `docs/decisions/ideas/`. Verdicts: `ADOPT` | `ADOPT_WITH_CHANGES` | `DEFER` | `REJECT`.
+3. If one prompt mixes different kinds of work (analyze / idea eval / implement / QA, or multiple slices), split into Stages and run only the current Stage.
+4. Mark guesses as hypotheses; ask when similarity or scope is unclear.
+5. When the user names a role, follow that role file strictly.
+6. When unclear, start as Producer.
+7. Persist reference work under `docs/references/` (INDEX + asset folder). Capture **user callouts** separately. See `.cursor/system-crew/workflows/reference-assets.md`.
+8. When the user proposes a system/implementation **idea** and asks to judge/apply it, run `.cursor/system-crew/workflows/idea-evaluation.md` first (Feasibility / Direction fit / Efficiency). Do not apply on taste alone. Log under `docs/decisions/ideas/`. Verdicts: `ADOPT` | `ADOPT_WITH_CHANGES` | `DEFER` | `REJECT`.
 
 ## Project-local overrides
 

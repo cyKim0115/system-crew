@@ -22,6 +22,7 @@ User input
 - In/Out scope, 성공 조건 확정.
 - 영상이 길면 “어느 구간을 재현할지”를 질문한다.
 - 기본으로 분석 결과는 `docs/references/`에 자산화한다.
+- **혼합 요청**: 역할·슬라이스·산출물 성격이 둘 이상이면 `mixed`로 Stage를 나누고 Stage 1만 진행한다. 자세한 기준은 `roles/01-producer.md`.
 
 ## Phase 1 — Analyze (Systems Analyst)
 
