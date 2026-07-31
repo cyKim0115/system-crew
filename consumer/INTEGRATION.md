@@ -53,6 +53,8 @@ Keep the same `-Mode` the project chose. Mode is also stored in `.cursor/rules/.
 Say one of: `system-crew`, `시스템 크루`, `Producer로`, `참고 재현`, `아이디어 평가해줘`  
 Or enable the `system-crew` Cursor skill.
 
+OnDemand sync writes `.cursor/SYSTEM-CREW.md` from `consumer/SYSTEM-CREW.on-demand.md` (UTF-8 template — Korean is not embedded in the `.ps1` source, to avoid Windows PowerShell encoding corruption).
+
 ## Local overrides
 
 Put project-only Cursor rules in `.cursor/rules/local/`.  

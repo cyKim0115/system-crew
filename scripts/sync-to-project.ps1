@@ -82,42 +82,12 @@ Write-Utf8Text $modeFile $Mode
 
 $bannerStart = "<!-- system-crew:start -->"
 $bannerEnd = "<!-- system-crew:end -->"
+$consumerDir = Join-Path $crewRoot "consumer"
 
 if ($Mode -eq "OnDemand") {
-    $section = @"
-$bannerStart
-# system-crew (on-demand)
-
-참고→시스템 구현 팩이 **호출형**으로 설치되어 있다. 평소 워크플로에는 끼어들지 않는다.
-
-## 호출 방법
-
-- `system-crew` / `시스템 크루` / `Producer로` / `참고 재현` / `아이디어 평가해줘` 라고 명시
-- 또는 Cursor Skill: `system-crew`
-
-## Paths
-
-- Submodule: `.cursor/system-crew`
-- Sync: `powershell -File .cursor/system-crew/scripts/sync-to-project.ps1 -Mode OnDemand`
-- Docs (when used): `docs/references/`, `docs/decisions/ideas/`
-$bannerEnd
-"@
+    $section = (Read-Utf8Text (Join-Path $consumerDir "AGENTS.banner.on-demand.md")).TrimEnd()
 } else {
-    $section = @"
-$bannerStart
-# system-crew
-
-Shared 4-role pack (submodule: `.cursor/system-crew`).
-
-- Update pack: `git submodule update --remote .cursor/system-crew`
-- Refresh Cursor rules: `powershell -File .cursor/system-crew/scripts/sync-to-project.ps1`
-- Workflow: `.cursor/system-crew/workflows/from-reference.md`
-- Idea evaluation: `.cursor/system-crew/workflows/idea-evaluation.md`
-- Roles: Producer → Systems Analyst → Implementer → Fidelity QA
-
-Project-only overrides: `.cursor/rules/local/`
-$bannerEnd
-"@
+    $section = (Read-Utf8Text (Join-Path $consumerDir "AGENTS.banner.always.md")).TrimEnd()
 }
 
 # Prefer root AGENTS.md; for OnDemand also allow .agents/AGENTS.md without creating a new root file
@@ -137,41 +107,26 @@ if ($Mode -eq "Always") {
     if (-not $agentsPath) {
         $agentsPath = Join-Path $ProjectRoot "AGENTS.md"
         $fromCrew = Read-Utf8Text (Join-Path $crewRoot "AGENTS.md")
-        Write-Utf8Text $agentsPath ($fromCrew.TrimEnd() + "`r`n`r`n" + $section.TrimEnd() + "`r`n")
+        Write-Utf8Text $agentsPath ($fromCrew.TrimEnd() + "`r`n`r`n" + $section + "`r`n")
     } else {
         $existing = Read-Utf8Text $agentsPath
         if ($existing -match [regex]::Escape($bannerStart)) {
-            $updated = [regex]::Replace($existing, "(?s)" + [regex]::Escape($bannerStart) + ".*?" + [regex]::Escape($bannerEnd), $section.TrimEnd())
+            $updated = [regex]::Replace($existing, "(?s)" + [regex]::Escape($bannerStart) + ".*?" + [regex]::Escape($bannerEnd), $section)
             Write-Utf8Text $agentsPath $updated
         } else {
-            Write-Utf8Text $agentsPath ($existing.TrimEnd() + "`r`n`r`n" + $section.TrimEnd() + "`r`n")
+            Write-Utf8Text $agentsPath ($existing.TrimEnd() + "`r`n`r`n" + $section + "`r`n")
         }
     }
 } elseif ($agentsPath) {
     # OnDemand: only refresh banner if already present; do not append to huge migrated AGENTS dumps
     $existing = Read-Utf8Text $agentsPath
     if ($existing -match [regex]::Escape($bannerStart)) {
-        $updated = [regex]::Replace($existing, "(?s)" + [regex]::Escape($bannerStart) + ".*?" + [regex]::Escape($bannerEnd), $section.TrimEnd())
+        $updated = [regex]::Replace($existing, "(?s)" + [regex]::Escape($bannerStart) + ".*?" + [regex]::Escape($bannerEnd), $section)
         Write-Utf8Text $agentsPath $updated
     }
-    # write lightweight usage note instead of polluting AGENTS
-    Write-Utf8Text (Join-Path $ProjectRoot ".cursor/SYSTEM-CREW.md") @"
-# system-crew (on-demand)
-
-이 프로젝트에서는 system-crew가 **상시 적용되지 않는다**. 필요할 때만 호출한다.
-
-## 호출
-
-- 채팅: `system-crew`, `시스템 크루`, `Producer로`, `참고 재현해줘`, `아이디어 평가해줘`
-- Skill: `.cursor/skills/system-crew`
-
-## 업데이트
-
-``````powershell
-git submodule update --remote .cursor/system-crew
-powershell -File .cursor/system-crew/scripts/sync-to-project.ps1 -Mode OnDemand
-``````
-"@
+    # write lightweight usage note instead of polluting AGENTS (UTF-8 template — avoid Korean in .ps1 source)
+    $notePath = Join-Path $ProjectRoot ".cursor/SYSTEM-CREW.md"
+    Copy-Item (Join-Path $consumerDir "SYSTEM-CREW.on-demand.md") $notePath -Force
 }
 
 $versionFile = Join-Path $crewRoot "VERSION"
@@ -184,5 +139,5 @@ $meta = @{
 } | ConvertTo-Json
 Write-Utf8Text $stamp $meta
 
-Write-Host "Synced system-crew $version ($Mode) → $dstRules"
+Write-Host "Synced system-crew $version ($Mode) -> $dstRules"
 Write-Host "Local overrides preserved under $localRules"
