@@ -15,29 +15,53 @@
    - 엔진·프로젝트 제약(Unity 등)이 있는지
    - 사용자가 짚은 포인트(콜아웃)가 있는지
    - **혼합 여부**: 한 프롬프트에 성격이 다른 일이 둘 이상인지 (아래 “혼합 → 단계 분할”)
-2. **혼합이면 단계 분할** (해당 시, 다른 작업보다 먼저)
+   - **프로토콜 적합 여부**: 참고 재현 / 시스템 스펙·구현 / 아이디어 평가가 **아닌** 요청인지 (아래 “프로토콜 밖”)
+2. **프로토콜 밖이면 거절·재라우팅** (해당 시, 4역할 루프를 억지로 끼워 맞추지 않음)
+3. **혼합이면 단계 분할** (해당 시, 다른 작업보다 먼저)
    - `Request type: mixed`로 두고 Stage 계획을 선언한 뒤 **현재 Stage만** 진행
    - 한 패스에 분석+평가+구현+QA 등을 몰아하지 않는다
-3. **아이디어면 평가 게이트** (`workflows/idea-evaluation.md`)
+4. **아이디어면 평가 게이트** (`workflows/idea-evaluation.md`)
    - 판정 전 본구현 금지
    - Feasibility / Direction fit / Efficiency로 평가
    - `ADOPT` | `ADOPT_WITH_CHANGES` | `DEFER` | `REJECT` 후 진행 또는 중단
    - 결과는 `docs/decisions/ideas/`에 기록
-4. **유사도 목표 확정** (참고 재현일 때)
+5. **유사도 목표 확정** (참고 재현일 때)
    - `faithful` — 참고와 동작·피드백을 최대한 재현
    - `inspired` — 핵심 루프만 차용, 표현은 프로젝트에 맞춤
-5. **범위 고정**
+6. **범위 고정**
    - In scope / Out of scope (한 시스템, 한 수직 슬라이스)
    - 성공 조건 2~5개 (플레이어가 체감할 문장)
-6. **자산화 여부**
+7. **자산화 여부**
    - 기본: 참고 분석은 `docs/references/`에 자산으로 저장 (`workflows/reference-assets.md`)
    - “분석만 / 구현까지”를 구분
-7. **다음 단계 선언**
+8. **다음 단계 선언**
+   - 프로토콜 밖 → 거절·재라우팅 (Next: decline / project skill)
    - 아이디어 제안 → Idea evaluation → (ADOPT*면) Analyst/Implementer
    - 참고가 있으면 → Systems Analyst
    - 스펙이 이미 승인됐으면 → Implementer
    - 구현 끝났으면 → Fidelity QA
    - mixed면 → 현재 Stage의 Next만 선언 (전체 목록은 Stages에)
+
+## 프로토콜 밖 → 거절·재라우팅
+
+system-crew는 **참고 설명·영상·콘텐츠 → 비슷한 게임 시스템 설계·구현·검증**에 특화된다.  
+사용자가 “시스템 크루에게”라고 말해도, 요청 성격이 프로토콜과 맞지 않으면 **Producer → Analyst → … 루프를 돌리지 않는다.**
+
+| 신호 (프로토콜 밖) | 예 | 권장 재라우팅 |
+|--------------------|----|----------------|
+| Cursor/에이전트 스킬·룰·팁 문서화 | “이 채팅 습관을 스킬로 남겨줘” | 프로젝트 `create-skill` / `project-workflows` 등 |
+| 참고 없는 일상 기능 작업만 | “버튼 색만 바꿔줘” (시스템 크루 호출만 붙인 경우) | 일반 구현 (system-crew 비활성) |
+| 툴링·인프라만 | CI 설정, 패키지 정리, 에디터 메뉴 정비 | 해당 프로젝트 워크플로 스킬 |
+| 산출물이 `docs/references/` 스펙이 아닌 메타 문서 | 에이전트 프롬프트/가이드만 작성 | 스킬·룰 작성 경로 |
+
+절차:
+
+1. Intake에 `Request type: out_of_scope`를 명시한다.
+2. **왜** system-crew가 맞지 않는지 한두 문장으로 설명한다 (예: 참고 재현이 아니라 에이전트 메타 문서).
+3. 올바른 경로를 제안하거나, 사용자가 원하면 system-crew 없이 그 일을 바로 수행한다.
+4. `docs/references/` 자산 폴더나 4역할 Stage를 **만들지 않는다.**
+
+사용자가 “system-crew 정신(관찰→분해→자산화)만 빌려 달라”고 명시하면, 그 정신은 유지하되 **역할 루프·템플릿·INDEX 자산화는 생략**하고 프로젝트 관례(스킬 경로 등)로 수행한다.
 
 ## 혼합 → 단계 분할
 
@@ -60,7 +84,7 @@
 
 ```markdown
 ## Intake
-- Request type: reference | idea | implement | qa | mixed
+- Request type: reference | idea | implement | qa | mixed | out_of_scope
 - Request:
 - References:
 - User callouts (known / ask):
@@ -71,12 +95,13 @@
 - Success criteria:
 - Asset / decision log:
 - Stages (if mixed): 1. … 2. … → Now: Stage N
-- Next: Idea evaluation | Systems Analyst | Implementer | Fidelity QA
+- Next: Idea evaluation | Systems Analyst | Implementer | Fidelity QA | decline / project skill
 - Blockers / questions:
 ```
 
 ## 금지
 
+- 프로토콜 밖 요청을 reference/spec 루프에 억지로 끼워 맞추기
 - 아이디어를 평가 없이 즉시 적용
 - 취향만으로 거절하거나, 근거 없이 무조건 수용
 - 참고를 보지 않고 구현 지시

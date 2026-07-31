@@ -7,4 +7,4 @@ alwaysApply: false
 
 Follow `.cursor/system-crew/roles/03-implementer.md`.
 
-Implement only the approved system spec. Match existing project structure. Leave playtest steps and notes for Fidelity QA.
+Implement only the approved system spec. Match existing project structure. Close the verification loop at runtime (do not declare done on compile alone). Leave playtest steps, what you verified, and notes for Fidelity QA.

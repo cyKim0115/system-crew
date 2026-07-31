@@ -27,6 +27,8 @@
 참고 자산화 상세: `workflows/reference-assets.md`  
 아이디어 평가: `workflows/idea-evaluation.md` (실현 가능성·방향성·효율 → 수용/수정/보류/거절)
 
+프로토콜 밖 요청(에이전트 스킬 문서화, 참고 없는 일상 수정 등)은 Producer가 4역할 루프를 돌리지 않고 재라우팅한다. Implementer는 컴파일만으로 완료하지 않고 런타임 검증을 남긴다.
+
 ## 소비 프로젝트에 설치 (submodule)
 
 프로젝트 루트에서:

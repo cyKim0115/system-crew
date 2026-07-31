@@ -22,6 +22,7 @@ User input
 - In/Out scope, 성공 조건 확정.
 - 영상이 길면 “어느 구간을 재현할지”를 질문한다.
 - 기본으로 분석 결과는 `docs/references/`에 자산화한다.
+- **프로토콜 밖**: 참고 재현·시스템 구현·아이디어 평가가 아니면 루프를 시작하지 않고 재라우팅한다. (`roles/01-producer.md`)
 - **혼합 요청**: 역할·슬라이스·산출물 성격이 둘 이상이면 `mixed`로 Stage를 나누고 Stage 1만 진행한다. 자세한 기준은 `roles/01-producer.md`.
 
 ## Phase 1 — Analyze (Systems Analyst)
@@ -37,6 +38,7 @@ User input
 
 - 승인 스펙만 구현.
 - 플레이 방법 1문단 + QA 포인트를 남긴다.
+- **런타임에서** 수직 슬라이스·엣지 케이스를 확인한 뒤 완료를 선언한다 (컴파일만으로 끝내지 않음).
 - 가능하면 자산 `Artifact links`에 구현 위치 메모.
 
 ## Phase 3 — Verify (Fidelity QA)

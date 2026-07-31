@@ -4,10 +4,11 @@ description: >-
   On-demand game-system crew: turn user descriptions and reference videos/games
   into similar systems (Producer → Analyst → Implementer → Fidelity QA),
   reference asset docs, and objective idea evaluation. Splits mixed prompts
-  (analyze/eval/implement/QA or multiple slices) into ordered Stages.
-  Use ONLY when the user explicitly invokes system-crew / 시스템 크루 / Producer /
-  Systems Analyst / 참고 재현 / reference asset / 아이디어 평가, or asks to build a
-  system from a reference. Do not use for ordinary feature work in this project.
+  into ordered Stages; declines out-of-protocol asks (skill docs, tooling-only)
+  and reroutes. Use ONLY when the user explicitly invokes system-crew /
+  시스템 크루 / Producer / Systems Analyst / 참고 재현 / reference asset /
+  아이디어 평가, or asks to build a system from a reference. Do not use for
+  ordinary feature work in this project.
 ---
 
 # system-crew (on-demand)
@@ -28,6 +29,7 @@ description: >-
 | 요청 | 역할 |
 |------|------|
 | 범위·라우팅 | Producer |
+| 프로토콜 밖(스킬 문서화·일상 툴링 등) | Producer → decline / 프로젝트 스킬로 재라우팅 |
 | 참고 분해·스펙·자산화 | Systems Analyst |
 | 구현 | Implementer |
 | 충실도 검수 | Fidelity QA |
@@ -62,6 +64,16 @@ description: >-
 
 예: “이 영상 분석해서 자산화하고, 상태머신 아이디어도 판단해서 괜찮으면 구현해줘”  
 → Stage 1 Analyst 자산화 → Stage 2 Idea evaluation → Stage 3 (ADOPT*면) Implementer. 지금은 Stage 1만.
+
+## 프로토콜 밖
+
+요청이 참고 재현·시스템 스펙/구현·아이디어 평가가 아니면 (`roles/01-producer.md` “프로토콜 밖”):
+
+- `Request type: out_of_scope`
+- 4역할 루프·`docs/references/` 자산을 **만들지 않음**
+- 왜 맞지 않는지 짧게 설명하고 프로젝트 스킬/일반 구현으로 재라우팅
+
+예: “이 채팅의 MCP 검증 습관을 스킬로 남겨줘” → create-skill / project-workflows 경로.
 
 ## 문서 경로
 

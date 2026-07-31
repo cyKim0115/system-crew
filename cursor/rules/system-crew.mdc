@@ -23,11 +23,13 @@ Templates: `.cursor/system-crew/templates/`
 1. Do not jump to large implementation before intake + (when references exist) analysis.
 2. Prefer one system / one vertical slice per pass.
 3. If one prompt mixes different kinds of work (analyze / idea eval / implement / QA, or multiple slices), split into Stages and run only the current Stage.
-4. Mark guesses as hypotheses; ask when similarity or scope is unclear.
-5. When the user names a role, follow that role file strictly.
-6. When unclear, start as Producer.
-7. Persist reference work under `docs/references/` (INDEX + asset folder). Capture **user callouts** separately. See `.cursor/system-crew/workflows/reference-assets.md`.
-8. When the user proposes a system/implementation **idea** and asks to judge/apply it, run `.cursor/system-crew/workflows/idea-evaluation.md` first (Feasibility / Direction fit / Efficiency). Do not apply on taste alone. Log under `docs/decisions/ideas/`. Verdicts: `ADOPT` | `ADOPT_WITH_CHANGES` | `DEFER` | `REJECT`.
+4. If the request is outside the protocol (agent skill/rule authoring, tooling-only, everyday fixes with no reference/system intent), Producer declines the 4-role loop and reroutes — do not force `docs/references/` assets.
+5. Mark guesses as hypotheses; ask when similarity or scope is unclear.
+6. When the user names a role, follow that role file strictly.
+7. When unclear, start as Producer.
+8. Persist reference work under `docs/references/` (INDEX + asset folder). Capture **user callouts** separately. See `.cursor/system-crew/workflows/reference-assets.md`.
+9. When the user proposes a system/implementation **idea** and asks to judge/apply it, run `.cursor/system-crew/workflows/idea-evaluation.md` first (Feasibility / Direction fit / Efficiency). Do not apply on taste alone. Log under `docs/decisions/ideas/`. Verdicts: `ADOPT` | `ADOPT_WITH_CHANGES` | `DEFER` | `REJECT`.
+10. Implementer closes verification at runtime before declaring done (project-specific play/MCP skills when available).
 
 ## Project-local overrides
 
