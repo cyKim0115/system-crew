@@ -42,11 +42,6 @@ icon: house
   </tbody>
 </table>
 
-{% hint style="info" %}
-공개 사이트: [https://cykim.gitbook.io/system-crew/](https://cykim.gitbook.io/system-crew/)  
-소스는 이 폴더(`docs/site/`)이며, Git Sync project directory는 `docs/site`입니다.
-{% endhint %}
-
 ## 한 줄로
 
 | 단계 | 누가 | 무엇을 |
