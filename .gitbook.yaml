@@ -1,0 +1,3 @@
+# GitBook: documentation lives under docs/site (human-facing guides).
+# Agent protocol files (roles/, workflows/, AGENTS.md) stay outside this root.
+root: ./docs/site/

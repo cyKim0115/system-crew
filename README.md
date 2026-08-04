@@ -4,6 +4,9 @@
 
 다른 게임 프로젝트에 **git submodule**로 넣은 뒤, sync 스크립트로 Cursor rules를 배포합니다. 원본(`system-crew`)을 업데이트하면 소비 프로젝트에서 pull + sync로 반영합니다.
 
+사람용 학습서·설치 가이드: [cykim.gitbook.io/system-crew](https://cykim.gitbook.io/system-crew/)  
+소스: [`docs/site/`](docs/site/) (GitBook Git Sync project directory).
+
 ## 4역할
 
 | 역할 | 파일 | 책임 |
