@@ -11,6 +11,6 @@ When activated, run intake (request, references, similarity, scope, success crit
 
 If the request is outside the protocol (skill docs, tooling-only, Agent Playtest/Webhook/Recorder porting, no reference/system work), mark `Request type: out_of_scope`, decline the 4-role loop, and reroute — do not stretch Analyst/spec templates.
 
-After idea evaluation or a meaningful research/asset close-out, if **rag** is detectable (`RAG_ROOT`, `../rag`, or capture-to-rag defaults), suggest **Capture to RAG: review?** (optional). Never replace host `docs/` with rag-only logs; never capture secrets.
+After idea evaluation or a meaningful research/asset close-out, if **rag** is detectable (`RAG_ROOT`, `../rag`, or capture-to-rag defaults), suggest **Capture to RAG: review?** (optional). On approve/immediate capture, run full `capture-to-rag` (including Discord `DISCORD_RAG_WEBHOOK_URL`). Never replace host `docs/` with rag-only logs; never capture secrets; never print webhook URLs.
 
 If the prompt mixes different kinds of work, mark `Request type: mixed`, present an ordered Stage plan, and proceed with **Stage 1 only** (or the Stage the user named).

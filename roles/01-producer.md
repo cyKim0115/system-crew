@@ -67,6 +67,9 @@ rag가 **없으면** 이 절을 무시한다 (에러 내지 않음).
 캡처는 **4역할 루프 밖 메타 작업**이다. `docs/references/` 대신 rag만 남기거나, 루프를 캡처로 대체하지 않는다.  
 비밀·웹훅 URL·휘발성 초안은 캡처하지 않는다.
 
+승인·즉시 캡처 시 **홈 스킬 `capture-to-rag` 전체를 따른다** (문서 저장 + `DISCORD_RAG_WEBHOOK_URL` Discord 보고).  
+웹훅은 **기기당** User 환경변수(또는 `RAG_ROOT/.env`)이며, 소비 프로젝트 `.env`의 `DISCORD_REPORT_WEBHOOK_URL`과 별개다. URL을 채팅에 출력하지 말고, payload에 `username`/`avatar_url`을 넣지 않는다.
+
 ## 프로토콜 밖 → 거절·재라우팅
 
 system-crew는 **참고 설명·영상·콘텐츠 → 비슷한 게임 시스템 설계·구현·검증**에 특화된다.  

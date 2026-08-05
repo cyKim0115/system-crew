@@ -83,7 +83,8 @@ description: >-
 
 ## RAG 캡처 (선택)
 
-호스트에 **rag**가 있으면(형제 `../rag` / `RAG_ROOT` / `capture-to-rag`), 리서치·아이디어 평가·의미 있는 자산화 **마무리 시** Producer가 `capture-to-rag` **검토**를 제안한다. 강제 저장 아님. 호스트 `docs/`를 대체하지 않는다.
+호스트에 **rag**가 있으면(형제 `../rag` / `RAG_ROOT` / `capture-to-rag`), 리서치·아이디어 평가·의미 있는 자산화 **마무리 시** Producer가 `capture-to-rag` **검토**를 제안한다. 강제 저장 아님. 호스트 `docs/`를 대체하지 않는다.  
+캡처 실행 시 `capture-to-rag` 전체(문서 + 기기당 `DISCORD_RAG_WEBHOOK_URL` Discord)를 따른다.
 
 ## 비활성 기본값
 
