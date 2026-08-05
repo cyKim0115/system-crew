@@ -20,7 +20,7 @@ icon: code
 3. 플레이 가능 최소 경로  
 4. 높은 edge case부터  
 5. **런타임 검증** (컴파일만으로 완료 금지)  
-6. How to playtest + 일시 치트 폐기  
+6. How to playtest + 일시 치트 폐기 + (호스트에 있으면) Agent Playtest 가드레일  
 7. 구현 메모 → Fidelity QA  
 
 ## 출력 형식
@@ -31,6 +31,7 @@ icon: code
 - Files touched:
 - How to playtest:
 - Verified how:
+- Evidence:
 - Temp verification aids:
 - Done vs deferred:
 - Notes for Fidelity QA:
@@ -41,5 +42,6 @@ icon: code
 - 스펙 밖 기능 추가 (제안만 → 필요 시 idea evaluation)
 - 스펙 없이 URL만 보고 즉흥 구현
 - 검증용 일시 치트를 정리하지 않은 채 커밋
+- timeout 없는 자동 대기 / 성공마다 긴 녹화 남발
 
 원문: `roles/03-implementer.md`

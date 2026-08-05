@@ -41,6 +41,7 @@ flowchart TD
 - 승인 스펙만, 수직 슬라이스
 - How to playtest + **런타임** 검증
 - 일시 치트는 검증 후 폐기
+- 호스트 Agent Playtest가 있으면 타임아웃·증거 예산 준수
 
 ## Phase 3 — Verify (Fidelity QA)
 

@@ -73,7 +73,8 @@ description: >-
 - 4역할 루프·`docs/references/` 자산을 **만들지 않음**
 - 왜 맞지 않는지 짧게 설명하고 프로젝트 스킬/일반 구현으로 재라우팅
 
-예: “이 채팅의 MCP 검증 습관을 스킬로 남겨줘” → create-skill / project-workflows 경로.
+예: “이 채팅의 MCP 검증 습관을 스킬로 남겨줘” → create-skill / project-workflows 경로.  
+예: “Webhook/Recorder를 이식해줘” → 호스트 agent-playtest / unity-recorder 스킬 (system-crew 루프 아님).
 
 ## 문서 경로
 

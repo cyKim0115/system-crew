@@ -14,7 +14,8 @@
 8. **프로토콜 밖 요청**은 4역할 루프에 끼워 맞추지 않는다. Producer가 거절·재라우팅한다 (`roles/01-producer.md`).
 9. Implementer는 컴파일만으로 끝내지 않는다. 수직 슬라이스를 런타임에서 확인한 뒤 완료를 선언한다 (`roles/03-implementer.md`).
 10. 검증용 **일시** 치트·스킵·디버그는 검증 후 폐기한다. 타이틀·인트로 등 진입 장벽은 `How to playtest`에 도달 방법을 적는다. 반복용 인프라는 프로젝트 스킬/영구 치트로 둔다.
-11. `REJECT`는 제품 채택 거절이다. 시간 제한 실험 재시도는 새 판정으로 허용할 수 있다. 경쟁 안을 시각 비교할 때는 `exp/*` 브랜치를 나누고, 제품 머지는 비교 후 별도 `ADOPT*`로 한다 (`workflows/idea-evaluation.md`).
+11. **Agent Playtest 자동화**(Webhook·Recorder·Scenario Until·체크포인트 등)는 호스트 게임 프로젝트 인프라다. system-crew 팩에 코드를 이식하지 않는다. 호스트에 스킬·도구가 있으면 Implementer/QA가 따르고, 이식·설정만 요청되면 `out_of_scope`로 재라우팅한다.
+12. `REJECT`는 제품 채택 거절이다. 시간 제한 실험 재시도는 새 판정으로 허용할 수 있다. 경쟁 안을 시각 비교할 때는 `exp/*` 브랜치를 나누고, 제품 머지는 비교 후 별도 `ADOPT*`로 한다 (`workflows/idea-evaluation.md`).
 
 ## 역할 라우팅
 
@@ -41,12 +42,14 @@
 - “이 영상 분석·자산화하고, 상태머신 아이디어도 판단해서 괜찮으면 구현해줘” (→ mixed, Stage 분할)
 - “상태머신으로 바꾸는 게 나을 것 같은데, 판단해서 적용해줘”
 - “이 채팅의 MCP 검증 습관을 스킬로 남겨줘” (→ out_of_scope, 프로젝트 스킬 경로로 재라우팅)
+- “Webhook/Recorder/Agent Playtest를 이 게임에 이식해줘” (→ out_of_scope, 호스트 프로젝트 워크플로)
 
 ## 이 팩을 쓰지 않는 경우
 
 - Cursor Agent 스킬·룰·팁만 작성 (참고 게임 시스템 재현이 아님)
 - 참고·스펙 없는 소규모 UI/버그픽스만 (호출어만 붙인 경우)
 - CI·패키지·에디터 툴링만
+- Agent Playtest / Webhook / Recorder 등 **플레이테스트 자동화 인프라** 이식·설정만
 
 ## 산출물
 

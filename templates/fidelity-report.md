@@ -25,6 +25,10 @@
 
 -
 
+## Evidence used
+
+- (없음 | 스크린샷/리포트/클립 경로 — 장문 영상 LLM 분석은 기본 아님)
+
 ## Verdict
 
 - Status: SHIPPABLE | NEEDS_FIX | NEEDS_SPEC | BLOCKED

@@ -52,6 +52,7 @@ system-crew는 **참고 설명·영상·콘텐츠 → 비슷한 게임 시스템
 | Cursor/에이전트 스킬·룰·팁 문서화 | “이 채팅 습관을 스킬로 남겨줘” | 프로젝트 `create-skill` / `project-workflows` 등 |
 | 참고 없는 일상 기능 작업만 | “버튼 색만 바꿔줘” (시스템 크루 호출만 붙인 경우) | 일반 구현 (system-crew 비활성) |
 | 툴링·인프라만 | CI 설정, 패키지 정리, 에디터 메뉴 정비 | 해당 프로젝트 워크플로 스킬 |
+| Agent Playtest 자동화만 | Webhook/Recorder/Scenario Until 이식·Secrets 설정 | 호스트 `agent-playtest` / `unity-recorder` / webhook 스킬 |
 | 산출물이 `docs/references/` 스펙이 아닌 메타 문서 | 에이전트 프롬프트/가이드만 작성 | 스킬·룰 작성 경로 |
 
 절차:
