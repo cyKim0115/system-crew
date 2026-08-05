@@ -76,6 +76,7 @@
    ```
 3. `ADOPT*`면 관련 `system-spec` / reference asset Decisions 표에 반영
 4. `REJECT`/`DEFER`여도 INDEX에 남겨 같은 제안을 반복 논의하지 않게 한다
+5. **rag가 탐지되면** (형제 `../rag` / `RAG_ROOT` / `capture-to-rag` 스킬 기본 경로): 판정 요약을 `capture-to-rag`로 남길지 **검토**한다. 기본은 제안만; 사용자가 원하면 즉시 캡처. 소비 프로젝트 `docs/decisions/` 기록을 대체하지 않는다.
 
 ## 톤
 

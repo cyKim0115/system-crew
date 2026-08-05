@@ -41,6 +41,31 @@
    - 스펙이 이미 승인됐으면 → Implementer
    - 구현 끝났으면 → Fidelity QA
    - mixed면 → 현재 Stage의 Next만 선언 (전체 목록은 Stages에)
+9. **Knowledge capture 검토** (해당 시 — 아래 “RAG 캡처”)
+
+## RAG 캡처 (선택 · 호스트에 rag가 있을 때)
+
+system-crew 루프의 **산출물은 소비 프로젝트 `docs/`에 남기는 것이 기본**이다.  
+그와 별도로, **다른 기기·프로젝트에서도 검색할 지식**이면 개인/공유 스킬 `capture-to-rag`로 `rag` 레포에 정제본을 남길 수 있다.
+
+### rag 존재 판별 (하나라도 해당)
+
+1. 환경변수 `RAG_ROOT`가 가리키는 경로에 `knowledge/` 또는 `AGENTS.md`가 있다
+2. 워크스페이스 형제 폴더 `../rag`가 존재한다
+3. 사용자 홈 스킬 `capture-to-rag`가 있고, 기본 경로 `C:/Users/<user>/repo/rag`가 존재한다
+
+rag가 **없으면** 이 절을 무시한다 (에러 내지 않음).
+
+### 트리거
+
+| 시점 | 동작 |
+|------|------|
+| 아이디어 평가 기록 완료 (`ADOPT*`/`DEFER`/`REJECT`) | Intake/Next에 **Capture to RAG: review?** 제안 |
+| 참고 분석·스펙 자산화가 “의미 있는 결론”으로 끝난 Stage | 동일 — 강제 저장 금지, 검토만 |
+| 사용자가 `rag에 남겨` / `capture-to-rag` | 즉시 `capture-to-rag` 스킬 수행 |
+
+캡처는 **4역할 루프 밖 메타 작업**이다. `docs/references/` 대신 rag만 남기거나, 루프를 캡처로 대체하지 않는다.  
+비밀·웹훅 URL·휘발성 초안은 캡처하지 않는다.
 
 ## 프로토콜 밖 → 거절·재라우팅
 
@@ -96,7 +121,7 @@ system-crew는 **참고 설명·영상·콘텐츠 → 비슷한 게임 시스템
 - Success criteria:
 - Asset / decision log:
 - Stages (if mixed): 1. … 2. … → Now: Stage N
-- Next: Idea evaluation | Systems Analyst | Implementer | Fidelity QA | decline / project skill
+- Next: Idea evaluation | Systems Analyst | Implementer | Fidelity QA | decline / project skill | Capture to RAG: review?
 - Blockers / questions:
 ```
 

@@ -50,6 +50,7 @@ User input
 - `NEEDS_FIX` → Implementer
 - `NEEDS_SPEC` → Analyst
 - `SHIPPABLE` → 종료 또는 다음 시스템 Intake
+- **rag 탐지 시:** 이번 슬라이스에서 다른 프로젝트/기기에 넘길 교훈이 있으면 Producer가 `capture-to-rag` **검토**를 제안한다 (호스트 `docs/references/` 대체 아님).
 
 ## Cursor에서 호출 예시
 
