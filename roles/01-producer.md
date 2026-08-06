@@ -62,7 +62,14 @@ rag가 **없으면** 이 절을 무시한다 (에러 내지 않음).
 |------|------|
 | 아이디어 평가 기록 완료 (`ADOPT*`/`DEFER`/`REJECT`) | Intake/Next에 **Capture to RAG: review?** 제안 |
 | 참고 분석·스펙 자산화가 “의미 있는 결론”으로 끝난 Stage | 동일 — 강제 저장 금지, 검토만 |
-| 사용자가 `rag에 남겨` / `capture-to-rag` | 즉시 `capture-to-rag` 스킬 수행 |
+| 사용자가 `rag에 남겨` / `capture-to-rag` / `랙에` | 즉시 `capture-to-rag` 스킬 수행 |
+| **system-crew 팩 릴리스** (이 레포에서 `CHANGELOG.md` + `VERSION` 범프, 소비자 프로토콜에 영향) | rag 있으면 **자동** 캡처 (제안 생략). 제목·본문에 버전·적용 포인트(소비 프로젝트가 sync할지 판단용) |
+
+### 팩 릴리스 캡처 (system-crew 레포에서만)
+
+1. `CHANGELOG.md`에 Added/Changed/Fixed 요약 → `VERSION` bump
+2. `capture-to-rag`로 `docs/assets/YYYY-MM-DD-system-crew-changelog.md` (또는 버전별 슬러그)에 **간략** 반영. `source` = `system-crew/CHANGELOG.md` + `VERSION`
+3. Discord 보고까지 스킬대로. 타이포·docs/site 문구만 고친 커밋은 스킵 가능
 
 캡처는 **4역할 루프 밖 메타 작업**이다. `docs/references/` 대신 rag만 남기거나, 루프를 캡처로 대체하지 않는다.  
 비밀·웹훅 URL·휘발성 초안은 캡처하지 않는다.

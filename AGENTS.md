@@ -17,6 +17,7 @@
 11. **Agent Playtest 자동화**(Webhook·Recorder·Scenario Until·체크포인트 등)는 호스트 게임 프로젝트 인프라다. system-crew 팩에 코드를 이식하지 않는다. 호스트에 스킬·도구가 있으면 Implementer/QA가 따르고, 이식·설정만 요청되면 `out_of_scope`로 재라우팅한다.
 12. `REJECT`는 제품 채택 거절이다. 시간 제한 실험 재시도는 새 판정으로 허용할 수 있다. 경쟁 안을 시각 비교할 때는 `exp/*` 브랜치를 나누고, 제품 머지는 비교 후 별도 `ADOPT*`로 한다 (`workflows/idea-evaluation.md`).
 13. 호스트에 **rag** 지식 레포가 있으면(형제 `../rag` / `RAG_ROOT` / `capture-to-rag`), 리서치·아이디어 평가·의미 있는 자산화 **마무리 시** Producer가 지식 캡처를 **검토**한다. 강제 저장이 아니며, 소비 프로젝트 `docs/` 기록을 대체하지 않는다. 캡처를 수행할 때는 `capture-to-rag` 스킬 전체(문서 + `DISCORD_RAG_WEBHOOK_URL` Discord 보고)를 따른다.
+14. **system-crew 팩 자체**를 고칠 때(역할·워크플로·룰·소비자에 영향 있는 프로토콜 변경)는 `CHANGELOG.md`에 요약을 쓰고 `VERSION`을 올린 뒤, rag가 있으면 `capture-to-rag`로 **자동** 캡처한다(검토 제안 단계 생략). 목적은 다른 기기/호스트가 RAG로 “적용할 만한 업데이트”를 조회하게 하는 것이다.
 
 ## 역할 라우팅
 

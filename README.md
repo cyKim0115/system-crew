@@ -59,14 +59,13 @@ powershell -File .cursor/system-crew/scripts/sync-to-project.ps1
 
 ## 원본 업데이트 반영
 
-소비 프로젝트에서:
-
 ```powershell
 git submodule update --remote .cursor/system-crew
-powershell -File .cursor/system-crew/scripts/sync-to-project.ps1
+powershell -File .cursor/system-crew/scripts/sync-to-project.ps1 -Mode Always
 # OnDemand 프로젝트는 -Mode OnDemand 유지
 ```
 
+적용 여부는 submodule `CHANGELOG.md` / `VERSION`, 또는 rag에서 `system-crew changelog` 검색으로 판단한다.  
 프로젝트 전용 커스텀은 `.cursor/rules/local/`에 두고, sync가 덮어쓰지 않게 합니다.
 
 ## 이 레포에서 Cursor로 편집할 때
